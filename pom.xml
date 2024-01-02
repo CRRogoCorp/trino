@@ -101,7 +101,8 @@
         </air.test.jvm.additional-arguments>
 
         <air.javadoc.lint>-missing</air.javadoc.lint>
-    </properties>
+  <versions.java-security-toolkit>1.1.1</versions.java-security-toolkit>
+ </properties>
 
     <modules>
         <module>client/trino-cli</module>
@@ -1935,7 +1936,12 @@
                 <artifactId>snakeyaml</artifactId>
                 <version>1.33</version>
             </dependency>
-        </dependencies>
+   <dependency>
+    <groupId>io.github.pixee</groupId>
+    <artifactId>java-security-toolkit</artifactId>
+    <version>${versions.java-security-toolkit}</version>
+   </dependency>
+  </dependencies>
     </dependencyManagement>
 
     <build>
