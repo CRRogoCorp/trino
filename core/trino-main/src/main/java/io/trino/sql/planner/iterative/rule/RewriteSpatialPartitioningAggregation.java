@@ -78,7 +78,7 @@ public class RewriteSpatialPartitioningAggregation
     private static boolean hasSpatialPartitioningAggregation(AggregationNode aggregationNode)
     {
         return aggregationNode.getAggregations().values().stream()
-                .anyMatch(aggregation -> aggregation.getResolvedFunction().getSignature().getName().equals(NAME) && aggregation.getArguments().size() == 1);
+                .anyMatch(aggregation -> NAME.equals(aggregation.getResolvedFunction().getSignature().getName()) && aggregation.getArguments().size() == 1);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class RewriteSpatialPartitioningAggregation
         for (Map.Entry<Symbol, Aggregation> entry : node.getAggregations().entrySet()) {
             Aggregation aggregation = entry.getValue();
             String name = aggregation.getResolvedFunction().getSignature().getName();
-            if (name.equals(NAME) && aggregation.getArguments().size() == 1) {
+            if (NAME.equals(name) && aggregation.getArguments().size() == 1) {
                 Expression geometry = getOnlyElement(aggregation.getArguments());
                 Symbol envelopeSymbol = context.getSymbolAllocator().newSymbol("envelope", plannerContext.getTypeManager().getType(GEOMETRY_TYPE_SIGNATURE));
                 if (isStEnvelopeFunctionCall(geometry, stEnvelopeFunction)) {

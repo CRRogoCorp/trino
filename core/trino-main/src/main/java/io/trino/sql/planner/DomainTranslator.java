@@ -1105,7 +1105,7 @@ public final class DomainTranslator
         protected ExtractionResult visitFunctionCall(FunctionCall node, Boolean complement)
         {
             String name = ResolvedFunction.extractFunctionName(node.getName());
-            if (name.equals("starts_with")) {
+            if ("starts_with".equals(name)) {
                 Optional<ExtractionResult> result = tryVisitStartsWithFunction(node, complement);
                 if (result.isPresent()) {
                     return result.get();

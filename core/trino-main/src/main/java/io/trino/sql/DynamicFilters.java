@@ -210,7 +210,7 @@ public final class DynamicFilters
     private static boolean isDynamicFilterFunction(FunctionCall functionCall)
     {
         String functionName = ResolvedFunction.extractFunctionName(functionCall.getName());
-        return functionName.equals(Function.NAME) || functionName.equals(NullableFunction.NAME);
+        return Function.NAME.equals(functionName) || NullableFunction.NAME.equals(functionName);
     }
 
     public static class ExtractResult

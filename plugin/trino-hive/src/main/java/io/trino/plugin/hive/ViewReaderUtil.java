@@ -152,7 +152,7 @@ public final class ViewReaderUtil
 
     public static boolean isTrinoMaterializedView(String tableType, Map<String, String> tableParameters)
     {
-        return isHiveOrPrestoView(tableType) && isPrestoView(tableParameters) && tableParameters.get(TABLE_COMMENT).equalsIgnoreCase(ICEBERG_MATERIALIZED_VIEW_COMMENT);
+        return isHiveOrPrestoView(tableType) && isPrestoView(tableParameters) && ICEBERG_MATERIALIZED_VIEW_COMMENT.equalsIgnoreCase(tableParameters.get(TABLE_COMMENT));
     }
 
     public static boolean canDecodeView(Table table)

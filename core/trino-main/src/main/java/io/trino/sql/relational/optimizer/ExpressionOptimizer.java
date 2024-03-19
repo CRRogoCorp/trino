@@ -191,7 +191,7 @@ public class ExpressionOptimizer
         {
             if (call.getArguments().get(0) instanceof CallExpression innerCall) {
                 // Optimization for CAST(JSON_PARSE(...) AS ARRAY/MAP/ROW)
-                if (innerCall.getResolvedFunction().getSignature().getName().equals("json_parse")) {
+                if ("json_parse".equals(innerCall.getResolvedFunction().getSignature().getName())) {
                     checkArgument(innerCall.getType().equals(JSON));
                     checkArgument(innerCall.getArguments().size() == 1);
                     Type returnType = call.getType();

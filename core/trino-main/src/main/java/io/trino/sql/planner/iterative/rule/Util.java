@@ -132,10 +132,10 @@ final class Util
         if (!signature.getArgumentTypes().isEmpty()) {
             return Optional.empty();
         }
-        if (signature.getName().equals("row_number")) {
+        if ("row_number".equals(signature.getName())) {
             return Optional.of(ROW_NUMBER);
         }
-        if (signature.getName().equals("rank")) {
+        if ("rank".equals(signature.getName())) {
             return Optional.of(RANK);
         }
         return Optional.empty();

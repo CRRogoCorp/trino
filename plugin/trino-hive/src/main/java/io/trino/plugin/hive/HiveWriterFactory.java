@@ -807,7 +807,7 @@ public class HiveWriterFactory
     {
         Path path = new Path(pathString);
         String scheme = path.toUri().getScheme();
-        if (scheme == null || scheme.equals("")) {
+        if (scheme == null || "".equals(scheme)) {
             return "file:///" + pathString;
         }
         return pathString;

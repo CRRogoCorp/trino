@@ -374,7 +374,7 @@ public class PreAggregateCaseAggregations
             Type defaultType = getType(context, caseExpression.getDefaultValue().get());
             Object defaultValue = optimizeExpression(caseExpression.getDefaultValue().get(), context);
             if (defaultValue != null) {
-                if (!name.equals("sum")) {
+                if (!"sum".equals(name)) {
                     return Optional.empty();
                 }
 

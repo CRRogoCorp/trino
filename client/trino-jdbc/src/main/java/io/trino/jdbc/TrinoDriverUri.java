@@ -268,7 +268,7 @@ public final class TrinoDriverUri
 
             // TODO: fix Tempto to allow empty passwords
             String password = PASSWORD.getValue(properties).orElse("");
-            if (!password.isEmpty() && !password.equals("***empty***")) {
+            if (!password.isEmpty() && !"***empty***".equals(password)) {
                 if (!useSecureConnection) {
                     throw new SQLException("Authentication using username/password requires SSL to be enabled");
                 }
@@ -385,7 +385,7 @@ public final class TrinoDriverUri
             throw new SQLException("Invalid JDBC URL: " + url);
         }
 
-        if (url.equals(JDBC_URL_START)) {
+        if (JDBC_URL_START.equals(url)) {
             throw new SQLException("Empty JDBC URL: " + url);
         }
 
@@ -424,7 +424,7 @@ public final class TrinoDriverUri
             throws SQLException
     {
         String path = uri.getPath();
-        if (isNullOrEmpty(uri.getPath()) || path.equals("/")) {
+        if (isNullOrEmpty(uri.getPath()) || "/".equals(path)) {
             return;
         }
 

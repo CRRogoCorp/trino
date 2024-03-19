@@ -52,9 +52,9 @@ public final class SpatialJoinUtils
     private static boolean isSupportedSpatialFunction(FunctionCall functionCall)
     {
         String functionName = extractFunctionName(functionCall.getName());
-        return functionName.equalsIgnoreCase(ST_CONTAINS) ||
-                functionName.equalsIgnoreCase(ST_WITHIN) ||
-                functionName.equalsIgnoreCase(ST_INTERSECTS);
+        return ST_CONTAINS.equalsIgnoreCase(functionName) ||
+                ST_WITHIN.equalsIgnoreCase(functionName) ||
+                ST_INTERSECTS.equalsIgnoreCase(functionName);
     }
 
     /**

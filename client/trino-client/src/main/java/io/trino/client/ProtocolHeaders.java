@@ -189,7 +189,7 @@ public final class ProtocolHeaders
         requireNonNull(alternateHeaderName, "alternateHeaderName is null");
         requireNonNull(headerNames, "headerNames is null");
 
-        if (alternateHeaderName.isPresent() && !alternateHeaderName.get().equalsIgnoreCase("Trino")) {
+        if (alternateHeaderName.isPresent() && !"Trino".equalsIgnoreCase(alternateHeaderName.get())) {
             if (headerNames.contains("X-" + alternateHeaderName.get() + "-User")) {
                 if (headerNames.contains("X-Trino-User")) {
                     throw new ProtocolDetectionException("Both Trino and " + alternateHeaderName.get() + " headers detected");

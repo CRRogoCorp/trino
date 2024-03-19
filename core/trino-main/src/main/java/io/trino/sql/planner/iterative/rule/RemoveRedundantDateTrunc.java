@@ -75,7 +75,7 @@ public class RemoveRedundantDateTrunc
         public Expression rewriteFunctionCall(FunctionCall node, Void context, ExpressionTreeRewriter<Void> treeRewriter)
         {
             String functionName = extractFunctionName(node.getName());
-            if (functionName.equals("date_trunc") && node.getArguments().size() == 2) {
+            if ("date_trunc".equals(functionName) && node.getArguments().size() == 2) {
                 Expression unitExpression = node.getArguments().get(0);
                 Expression argument = node.getArguments().get(1);
                 if (getType(argument) == DATE && getType(unitExpression) instanceof VarcharType && isEffectivelyLiteral(plannerContext, session, unitExpression)) {

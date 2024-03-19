@@ -39,7 +39,7 @@ public class ReplaceWindowWithRowNumber
                         return false;
                     }
                     BoundSignature signature = getOnlyElement(window.getWindowFunctions().values()).getResolvedFunction().getSignature();
-                    return signature.getArgumentTypes().isEmpty() && signature.getName().equals("row_number");
+                    return signature.getArgumentTypes().isEmpty() && "row_number".equals(signature.getName());
                 })
                 .matching(window -> window.getOrderingScheme().isEmpty());
     }

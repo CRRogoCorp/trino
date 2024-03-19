@@ -253,7 +253,7 @@ public class PushFilterThroughCountAggregation
         }
 
         BoundSignature signature = aggregation.getResolvedFunction().getSignature();
-        return signature.getArgumentTypes().isEmpty() && signature.getName().equals("count");
+        return signature.getArgumentTypes().isEmpty() && "count".equals(signature.getName());
     }
 
     private static boolean isGroupedAggregation(AggregationNode aggregationNode)

@@ -150,7 +150,7 @@ public class DateProjectionFactory
                         ChronoUnit.valueOf(unitString + "S"),
                         operator.charAt(0) == '+');
             }
-            if (value.trim().equals("NOW")) {
+            if ("NOW".equals(value.trim())) {
                 Instant now = Instant.now();
                 return () -> now;
             }

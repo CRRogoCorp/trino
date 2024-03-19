@@ -1046,7 +1046,7 @@ public class ExpressionInterpreter
             if (optimize && (!metadata.getFunctionMetadata(session, resolvedFunction).isDeterministic() ||
                     hasUnresolvedValue(argumentValues) ||
                     isDynamicFilter(node) ||
-                    resolvedFunction.getSignature().getName().equals("fail"))) {
+                    "fail".equals(resolvedFunction.getSignature().getName()))) {
                 verify(!node.isDistinct(), "distinct not supported");
                 verify(node.getOrderBy().isEmpty(), "order by not supported");
                 verify(node.getFilter().isEmpty(), "filter not supported");

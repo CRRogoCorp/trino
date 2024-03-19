@@ -181,7 +181,7 @@ public class OptimizeMixedDistinctAggregations
                             Optional.empty(),
                             Optional.empty());
                     String signatureName = aggregation.getResolvedFunction().getSignature().getName();
-                    if (signatureName.equals("count") || signatureName.equals("count_if") || signatureName.equals("approx_distinct")) {
+                    if ("count".equals(signatureName) || "count_if".equals(signatureName) || "approx_distinct".equals(signatureName)) {
                         Symbol newSymbol = symbolAllocator.newSymbol("expr", symbolAllocator.getTypes().get(entry.getKey()));
                         aggregations.put(newSymbol, newAggregation);
                         coalesceSymbolsBuilder.put(newSymbol, entry.getKey());

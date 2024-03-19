@@ -108,7 +108,7 @@ public class SimplifyCountOverConstant
     private boolean isCountOverConstant(Session session, AggregationNode.Aggregation aggregation, Assignments inputs)
     {
         BoundSignature signature = aggregation.getResolvedFunction().getSignature();
-        if (!signature.getName().equals("count") || signature.getArgumentTypes().size() != 1) {
+        if (!"count".equals(signature.getName()) || signature.getArgumentTypes().size() != 1) {
             return false;
         }
 

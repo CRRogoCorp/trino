@@ -105,7 +105,7 @@ public class FormWebUiAuthenticationFilter
         String path = request.getUriInfo().getRequestUri().getPath();
 
         // disabled page is always visible
-        if (path.equals(DISABLED_LOCATION)) {
+        if (DISABLED_LOCATION.equals(path)) {
             return;
         }
 
@@ -116,7 +116,7 @@ public class FormWebUiAuthenticationFilter
         }
 
         // login and logout resource is not visible to protocol authenticators
-        if ((path.equals(UI_LOGIN) && request.getMethod().equals("POST")) || path.equals(UI_LOGOUT)) {
+        if ((UI_LOGIN.equals(path) && request.getMethod().equals("POST")) || UI_LOGOUT.equals(path)) {
             return;
         }
 
@@ -124,7 +124,7 @@ public class FormWebUiAuthenticationFilter
         Optional<String> username = getAuthenticatedUsername(request);
         if (username.isPresent()) {
             // if the authenticated user is requesting the login page, send them directly to the ui
-            if (path.equals(LOGIN_FORM)) {
+            if (LOGIN_FORM.equals(path)) {
                 request.abortWith(redirectFromSuccessfulLoginResponse(request.getUriInfo().getRequestUri().getQuery()).build());
                 return;
             }
@@ -143,7 +143,7 @@ public class FormWebUiAuthenticationFilter
             return;
         }
 
-        if (path.equals(LOGIN_FORM)) {
+        if (LOGIN_FORM.equals(path)) {
             return;
         }
 
@@ -163,7 +163,7 @@ public class FormWebUiAuthenticationFilter
             path += "?" + uriInfo.getRequestUri().getQuery();
         }
 
-        if (path.equals("/ui") || path.equals("/ui/")) {
+        if ("/ui".equals(path) || "/ui/".equals(path)) {
             return builder.build();
         }
 
@@ -203,7 +203,7 @@ public class FormWebUiAuthenticationFilter
     {
         // these paths should never be used with a protocol login, but the user might have this cached or linked, so redirect back to the main UI page.
         String path = request.getUriInfo().getRequestUri().getPath();
-        if (path.equals(LOGIN_FORM) || path.equals(UI_LOGIN) || path.equals(UI_LOGOUT)) {
+        if (LOGIN_FORM.equals(path) || UI_LOGIN.equals(path) || UI_LOGOUT.equals(path)) {
             request.abortWith(Response.seeOther(UI_LOCATION_URI).build());
             return true;
         }
@@ -313,7 +313,7 @@ public class FormWebUiAuthenticationFilter
     {
         // these paths should never be used with a protocol login, but the user might have this cached or linked, so redirect back ot the main UI page.
         String path = request.getUriInfo().getRequestUri().getPath();
-        if (path.equals(LOGIN_FORM) || path.equals(UI_LOGIN) || path.equals(UI_LOGOUT)) {
+        if (LOGIN_FORM.equals(path) || UI_LOGIN.equals(path) || UI_LOGOUT.equals(path)) {
             request.abortWith(Response.seeOther(UI_LOCATION_URI).build());
             return true;
         }

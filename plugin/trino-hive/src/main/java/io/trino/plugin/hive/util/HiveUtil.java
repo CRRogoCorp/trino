@@ -695,10 +695,10 @@ public final class HiveUtil
 
     public static boolean booleanPartitionKey(String value, String name)
     {
-        if (value.equalsIgnoreCase("true")) {
+        if ("true".equalsIgnoreCase(value)) {
             return true;
         }
-        if (value.equalsIgnoreCase("false")) {
+        if ("false".equalsIgnoreCase(value)) {
             return false;
         }
         throw new TrinoException(HIVE_INVALID_PARTITION_VALUE, format("Invalid partition value '%s' for BOOLEAN partition key: %s", value, name));
@@ -1118,7 +1118,7 @@ public final class HiveUtil
     public static boolean isDeltaLakeTable(Map<String, String> tableParameters)
     {
         return tableParameters.containsKey(SPARK_TABLE_PROVIDER_KEY)
-                && tableParameters.get(SPARK_TABLE_PROVIDER_KEY).toLowerCase(ENGLISH).equals(DELTA_LAKE_PROVIDER);
+                && DELTA_LAKE_PROVIDER.equals(tableParameters.get(SPARK_TABLE_PROVIDER_KEY).toLowerCase(ENGLISH));
     }
 
     public static boolean isIcebergTable(Table table)
@@ -1162,7 +1162,7 @@ public final class HiveUtil
         List<Column> tableColumns = table.getDataColumns();
         ImmutableMap.Builder<String, Optional<String>> builder = ImmutableMap.builder();
         for (Column field : concat(tableColumns, table.getPartitionColumns())) {
-            if (field.getComment().isPresent() && !field.getComment().get().equals("from deserializer")) {
+            if (field.getComment().isPresent() && !"from deserializer".equals(field.getComment().get())) {
                 builder.put(field.getName(), field.getComment());
             }
             else {

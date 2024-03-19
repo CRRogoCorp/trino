@@ -556,7 +556,7 @@ public class PostgreSqlClient
                 return Optional.of(charColumnMapping(typeHandle.getRequiredColumnSize()));
 
             case Types.VARCHAR:
-                if (!jdbcTypeName.equals("varchar")) {
+                if (!"varchar".equals(jdbcTypeName)) {
                     // This can be e.g. an ENUM
                     return Optional.of(typedVarcharColumnMapping(jdbcTypeName));
                 }

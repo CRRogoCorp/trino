@@ -190,7 +190,7 @@ public class SingleStoreClient
     @Override
     protected boolean filterSchema(String schemaName)
     {
-        if (schemaName.equalsIgnoreCase("memsql")) {
+        if ("memsql".equalsIgnoreCase(schemaName)) {
             return false;
         }
         return super.filterSchema(schemaName);
@@ -218,7 +218,7 @@ public class SingleStoreClient
             return unsignedMapping;
         }
 
-        if (jdbcTypeName.equalsIgnoreCase("json")) {
+        if ("json".equalsIgnoreCase(jdbcTypeName)) {
             return Optional.of(jsonColumnMapping());
         }
 

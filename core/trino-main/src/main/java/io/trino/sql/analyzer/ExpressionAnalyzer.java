@@ -1664,7 +1664,7 @@ public class ExpressionAnalyzer
             String name = node.getName().getSuffix();
             if (node.getProcessingMode().isPresent()) {
                 ProcessingMode processingMode = node.getProcessingMode().get();
-                if (!name.equalsIgnoreCase("FIRST") && !name.equalsIgnoreCase("LAST")) {
+                if (!"FIRST".equalsIgnoreCase(name) && !"LAST".equalsIgnoreCase(name)) {
                     throw semanticException(INVALID_PROCESSING_MODE, processingMode, "%s semantics is not supported with %s pattern recognition function", processingMode.getMode(), node.getName());
                 }
             }
@@ -1734,7 +1734,7 @@ public class ExpressionAnalyzer
                     .filter(this::isPatternNavigationFunction)
                     .collect(toImmutableList());
             if (!nestedNavigationFunctions.isEmpty()) {
-                if (name.equalsIgnoreCase("FIRST") || name.equalsIgnoreCase("LAST")) {
+                if ("FIRST".equalsIgnoreCase(name) || "LAST".equalsIgnoreCase(name)) {
                     throw semanticException(
                             INVALID_NAVIGATION_NESTING,
                             nestedNavigationFunctions.get(0),
@@ -1748,7 +1748,7 @@ public class ExpressionAnalyzer
                 }
                 FunctionCall nested = getOnlyElement(nestedNavigationFunctions);
                 String nestedName = nested.getName().getSuffix();
-                if (nestedName.equalsIgnoreCase("PREV") || nestedName.equalsIgnoreCase("NEXT")) {
+                if ("PREV".equalsIgnoreCase(nestedName) || "NEXT".equalsIgnoreCase(nestedName)) {
                     throw semanticException(
                             INVALID_NAVIGATION_NESTING,
                             nested,
@@ -1889,10 +1889,10 @@ public class ExpressionAnalyzer
                 return false;
             }
             String name = node.getName().getSuffix().toUpperCase(ENGLISH);
-            return name.equals("FIRST") ||
-                    name.equals("LAST") ||
-                    name.equals("PREV") ||
-                    name.equals("NEXT");
+            return "FIRST".equals(name) ||
+                    "LAST".equals(name) ||
+                    "PREV".equals(name) ||
+                    "NEXT".equals(name);
         }
 
         private boolean isClassifierFunction(FunctionCall node)
@@ -1900,7 +1900,7 @@ public class ExpressionAnalyzer
             if (!isPatternRecognitionFunction(node)) {
                 return false;
             }
-            return node.getName().getSuffix().toUpperCase(ENGLISH).equals("CLASSIFIER");
+            return "CLASSIFIER".equals(node.getName().getSuffix().toUpperCase(ENGLISH));
         }
 
         private String label(Identifier identifier)
@@ -3354,12 +3354,12 @@ public class ExpressionAnalyzer
             return false;
         }
         String name = identifier.getValue().toUpperCase(ENGLISH);
-        return name.equals("FIRST") ||
-                name.equals("LAST") ||
-                name.equals("PREV") ||
-                name.equals("NEXT") ||
-                name.equals("CLASSIFIER") ||
-                name.equals("MATCH_NUMBER");
+        return "FIRST".equals(name) ||
+                "LAST".equals(name) ||
+                "PREV".equals(name) ||
+                "NEXT".equals(name) ||
+                "CLASSIFIER".equals(name) ||
+                "MATCH_NUMBER".equals(name);
     }
 
     public static ExpressionAnalysis analyzePatternRecognitionExpression(

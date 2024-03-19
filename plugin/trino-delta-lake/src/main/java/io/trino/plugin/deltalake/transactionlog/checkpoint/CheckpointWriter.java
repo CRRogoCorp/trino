@@ -279,10 +279,10 @@ public class CheckpointWriter
         else {
             int internalFieldId = 0;
             writeLong(statsBlockBuilder, statsType, internalFieldId++, "numRecords", stats.getNumRecords().orElse(null));
-            if (statsType.getFields().stream().anyMatch(field -> field.getName().orElseThrow().equals("minValues"))) {
+            if (statsType.getFields().stream().anyMatch(field -> "minValues".equals(field.getName().orElseThrow()))) {
                 writeMinMaxMapAsFields(statsBlockBuilder, statsType, internalFieldId++, "minValues", stats.getMinValues(), true);
             }
-            if (statsType.getFields().stream().anyMatch(field -> field.getName().orElseThrow().equals("maxValues"))) {
+            if (statsType.getFields().stream().anyMatch(field -> "maxValues".equals(field.getName().orElseThrow()))) {
                 writeMinMaxMapAsFields(statsBlockBuilder, statsType, internalFieldId++, "maxValues", stats.getMaxValues(), true);
             }
             writeNullCountAsFields(statsBlockBuilder, statsType, internalFieldId++, "nullCount", stats.getNullCount());

@@ -1872,7 +1872,7 @@ public class DeltaLakeMetadata
     public Map<String, Object> getSchemaProperties(ConnectorSession session, CatalogSchemaName schemaName)
     {
         String schema = schemaName.getSchemaName();
-        checkState(!schema.equals("information_schema") && !schema.equals("sys"), "Schema is not accessible: %s", schemaName);
+        checkState(!"information_schema".equals(schema) && !"sys".equals(schema), "Schema is not accessible: %s", schemaName);
         Optional<Database> db = metastore.getDatabase(schema);
         return db.map(DeltaLakeSchemaProperties::fromDatabase).orElseThrow(() -> new SchemaNotFoundException(schema));
     }

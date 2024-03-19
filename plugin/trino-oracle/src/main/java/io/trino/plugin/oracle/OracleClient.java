@@ -315,7 +315,7 @@ public class OracleClient
             return mappingToVarchar;
         }
 
-        if (jdbcTypeName.equalsIgnoreCase("date")) {
+        if ("date".equalsIgnoreCase(jdbcTypeName)) {
             return Optional.of(ColumnMapping.longMapping(
                     TIMESTAMP_SECONDS,
                     oracleTimestampReadFunction(),
