@@ -28,6 +28,8 @@ import io.airlift.json.JsonCodec;
 import io.airlift.log.Logger;
 import io.airlift.slice.Slice;
 import io.airlift.units.DataSize;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.trino.filesystem.TrinoFileSystem;
 import io.trino.filesystem.TrinoFileSystemFactory;
 import io.trino.filesystem.TrinoOutputFile;
@@ -1182,7 +1184,7 @@ public class HiveMetadata
     private String validateAndNormalizeAvroSchemaUrl(String url, HdfsContext context)
     {
         try {
-            new URL(url).openStream().close();
+            Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream().close();
             return url;
         }
         catch (MalformedURLException e) {
