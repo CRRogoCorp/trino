@@ -17,6 +17,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import io.airlift.json.JsonCodec;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.trino.operator.RetryPolicy;
 import io.trino.spi.eventlistener.EventListener;
 import io.trino.spi.eventlistener.QueryCompletedEvent;
@@ -366,7 +368,7 @@ public class TestHttpEventListener
         server.enqueue(new MockResponse().setResponseCode(200));
 
         EventListener eventListener = factory.create(Map.of(
-                "http-event-listener.connect-ingest-uri", new URL("https", server.getHostName(), server.getPort(), "/").toString(),
+                "http-event-listener.connect-ingest-uri", Urls.create("https", server.getHostName(), server.getPort(), "/", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString(),
                 "http-event-listener.log-completed", "true",
                 "http-event-listener.http-client.key-store-path", "src/test/resources/trino-httpquery-test.p12",
                 "http-event-listener.http-client.key-store-password", "testing-ssl"));
