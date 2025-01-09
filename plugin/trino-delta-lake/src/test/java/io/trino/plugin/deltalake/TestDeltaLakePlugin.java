@@ -194,7 +194,7 @@ public class TestDeltaLakePlugin
     {
         Plugin plugin = new DeltaLakePlugin();
         ConnectorFactory factory = getOnlyElement(plugin.getConnectorFactories());
-        File tempFile = File.createTempFile("test-delta-lake-plugin-access-control", ".json");
+        File tempFile = Files.createTempFile("test-delta-lake-plugin-access-control", ".json").toFile();
         tempFile.deleteOnExit();
         Files.writeString(tempFile.toPath(), "{}");
 

@@ -51,6 +51,7 @@ import io.trino.spi.security.RoleGrant;
 import io.trino.spi.security.TrinoPrincipal;
 import io.trino.spi.type.TestingTypeManager;
 import io.trino.spi.type.Type;
+import java.nio.file.Files;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -138,7 +139,7 @@ public class TestRecordingHiveMetastore
             throws IOException
     {
         RecordingMetastoreConfig recordingConfig = new RecordingMetastoreConfig()
-                .setRecordingPath(File.createTempFile("recording_test", "json").getAbsolutePath())
+                .setRecordingPath(Files.createTempFile("recording_test", "json").toFile().getAbsolutePath())
                 .setRecordingDuration(new Duration(10, TimeUnit.MINUTES));
         JsonCodec<HiveMetastoreRecording.Recording> jsonCodec = createJsonCodec();
         HiveMetastoreRecording recording = new HiveMetastoreRecording(recordingConfig, jsonCodec);
