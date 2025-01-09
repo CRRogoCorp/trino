@@ -24,6 +24,7 @@ import io.trino.plugin.jdbc.DriverConnectionFactory;
 import io.trino.plugin.jdbc.RetryingConnectionFactory;
 import io.trino.plugin.jdbc.credential.StaticCredentialProvider;
 import io.trino.testing.ResourcePresence;
+import java.nio.file.Files;
 import oracle.jdbc.OracleDriver;
 import org.testcontainers.containers.OracleContainer;
 import org.testcontainers.utility.MountableFile;
@@ -83,7 +84,7 @@ public class TestingOracleServer
     private Path createConfigureScript()
     {
         try {
-            File tempFile = File.createTempFile("init-", ".sql");
+            File tempFile = Files.createTempFile("init-", ".sql").toFile();
 
             Files.write(Joiner.on("\n").join(
                     format("CREATE TABLESPACE %s DATAFILE 'test_db.dat' SIZE 100M ONLINE;", TEST_TABLESPACE),
