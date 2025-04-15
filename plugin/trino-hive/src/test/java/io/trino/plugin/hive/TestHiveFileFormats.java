@@ -47,6 +47,7 @@ import io.trino.spi.connector.RecordPageSource;
 import io.trino.spi.predicate.TupleDomain;
 import io.trino.spi.type.Type;
 import io.trino.testing.TestingConnectorSession;
+import java.nio.file.Files;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.common.type.HiveVarchar;
 import org.apache.hadoop.hive.ql.io.SymlinkTextInputFormat;
@@ -411,7 +412,7 @@ public class TestHiveFileFormats
     public void testAvroFileInSymlinkTable(int rowCount)
             throws Exception
     {
-        File file = File.createTempFile("trino_test", AVRO.name());
+        File file = Files.createTempFile("trino_test", AVRO.name()).toFile();
         //noinspection ResultOfMethodCallIgnored
         file.delete();
         try {
@@ -1318,7 +1319,7 @@ public class TestHiveFileFormats
                     .map(CompressionKind::getFileExtension)
                     .orElse("");
 
-            File file = File.createTempFile("trino_test", formatName + compressionSuffix);
+            File file = Files.createTempFile("trino_test", formatName + compressionSuffix).toFile();
             file.delete();
             for (boolean testFileWriter : ImmutableList.of(false, true)) {
                 try {

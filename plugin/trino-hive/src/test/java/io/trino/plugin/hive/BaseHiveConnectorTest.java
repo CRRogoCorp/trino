@@ -59,6 +59,7 @@ import io.trino.testing.TestingConnectorBehavior;
 import io.trino.testing.sql.TestTable;
 import io.trino.testing.sql.TrinoSqlExecutor;
 import io.trino.type.TypeDeserializer;
+import java.nio.file.Files;
 import org.apache.hadoop.fs.Path;
 import org.assertj.core.api.AbstractLongAssert;
 import org.intellij.lang.annotations.Language;
@@ -7571,7 +7572,7 @@ public abstract class BaseHiveConnectorTest
     private static File createAvroSchemaFile()
             throws Exception
     {
-        File schemaFile = File.createTempFile("avro_single_column-", ".avsc");
+        File schemaFile = Files.createTempFile("avro_single_column-", ".avsc").toFile();
         String schema = "{\n" +
                 "  \"namespace\": \"io.trino.test\",\n" +
                 "  \"name\": \"single_column\",\n" +
