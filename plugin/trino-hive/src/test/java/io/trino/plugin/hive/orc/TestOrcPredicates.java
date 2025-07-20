@@ -32,6 +32,7 @@ import io.trino.spi.connector.ConnectorPageSource;
 import io.trino.spi.connector.ConnectorSession;
 import io.trino.spi.predicate.Domain;
 import io.trino.spi.predicate.TupleDomain;
+import java.nio.file.Files;
 import org.apache.hadoop.mapred.FileSplit;
 import org.testng.annotations.Test;
 
@@ -95,7 +96,7 @@ public class TestOrcPredicates
     {
         List<TestColumn> columnsToWrite = ImmutableList.of(columnPrimitiveInteger, columnStruct, columnPrimitiveBigInt);
 
-        File file = File.createTempFile("test", "orc_predicate");
+        File file = Files.createTempFile("test", "orc_predicate").toFile();
         file.delete();
         try {
             // Write data
